@@ -1,7 +1,8 @@
 'use strict';
 
 var assert = require('assert');
-var _ = require('grunt').util._;
+var grunt = require('grunt');
+var _ = require('lodash');
 
 var Task = (function () {
     function Task(test) {
@@ -60,11 +61,13 @@ var Test = (function () {
             callback.apply(null, expectation.result);
         };
 
-        this.command(task, exec, function (err) {
+        var done = function (err) {
             assert.equal(err, null);
             assert.equal(self.expectations.length, 0, 'Did not match all expectations');
             cb();
-        });
+        };
+
+        this.command(task, exec, done, grunt);
     };
 
     return Test;

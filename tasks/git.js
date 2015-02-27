@@ -45,7 +45,7 @@ module.exports = function (grunt) {
             }
 
             var done = self.async();
-            fn(self, exec, done);
+            fn(self, exec, done, grunt);
         };
     }
 
